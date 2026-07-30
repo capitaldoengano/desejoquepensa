@@ -479,7 +479,7 @@
     }
     #cta h2 em { font-style: italic; color: var(--gold); }
 
-    #cta > .container > p {
+    #cta > .container > p.cta-lead {
       font-size: 16px;
       color: var(--muted);
       max-width: 380px;
@@ -523,8 +523,24 @@
       white-space: nowrap;
     }
     .waitlist-wrap button:hover { background: var(--ink-mid); }
+    .waitlist-wrap button:disabled { opacity: .5; cursor: default; }
 
-    #waitlist-msg { font-size: 12px; color: var(--muted); }
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      max-width: 400px;
+      margin: 14px auto 0;
+      font-size: 12px;
+      color: var(--muted);
+      text-align: left;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .consent-row input { margin-top: 3px; flex-shrink: 0; accent-color: var(--gold); }
+    .consent-row a { color: var(--ink-mid); text-decoration: underline; text-decoration-color: rgba(138,138,154,.4); }
+
+    #waitlist-msg { font-size: 12px; color: var(--muted); margin-top: 16px; }
 
     /* ── MATERIAIS ─────────────────────────────── */
     #materiais { padding: 96px 0; }
@@ -946,11 +962,15 @@
   <div class="container">
     <div class="sec-eyebrow" style="text-align:center;">Próxima turma</div>
     <h2>A lista de espera<br/>está <em>aberta.</em></h2>
-    <p>A primeira turma está em andamento. Deixe seu email e você recebe o aviso antes da divulgação pública.</p>
+    <p class="cta-lead">A primeira turma está em andamento. Deixe seu email e você recebe o aviso antes da divulgação pública.</p>
     <form class="waitlist-wrap" onsubmit="handleWaitlist(event)">
       <input type="email" id="waitlist-email" placeholder="seu@email.com" required />
       <button type="submit">Entrar na lista</button>
     </form>
+    <label class="consent-row" for="waitlist-consent">
+      <input type="checkbox" id="waitlist-consent" required />
+      <span>Concordo em entrar na lista de espera e receber o Substack de Gustavo por email. Seu email é guardado só para isso e você pode sair quando quiser. Sem spam.</span>
+    </label>
     <p id="waitlist-msg">Sem spam. Só o aviso quando a próxima turma abrir.</p>
   </div>
 </section>
@@ -1080,8 +1100,23 @@
 </footer>
 
 <script>
-  const SENHA = "labvinculo2026"; // ← troque aqui
+  /* ═══════════════════════════════════════════════════════════
+     CONFIGURAÇÃO — troque os DOIS valores abaixo
+     ═══════════════════════════════════════════════════════════ */
 
+  // 1) URL do seu Apps Script (termina em /exec)
+  const WAITLIST_URL = "https://script.google.com/macros/s/AKfycbwE1TP3rlB1O0qRy0z5vCGykCmvIBW3Lno3E7piBQ4o6Q2IGUBmtldZoic3BW1UB5qa/exec";
+
+  // 2) Subdomínio do seu Substack — só a parte antes de .substack.com
+  //    Ex.: se for gustavosouzapauli.substack.com, ponha "gustavosouzapauli"
+  const SUBSTACK_SUB = "gustavosouzapauli";
+
+  // Senha da área do aluno
+  const SENHA = "labvinculo2026";
+
+  /* ═══════════════════════════════════════════════════════════
+     ÁREA DO ALUNO
+     ═══════════════════════════════════════════════════════════ */
   function checkPass() {
     const v = document.getElementById("mat-password").value.trim();
     if (v === SENHA) {
@@ -1114,13 +1149,51 @@
     document.addEventListener("DOMContentLoaded", showMateriais);
   }
 
-  function handleWaitlist(e) {
+  /* ═══════════════════════════════════════════════════════════
+     LISTA DE ESPERA — salva na planilha + tenta Substack
+     ═══════════════════════════════════════════════════════════ */
+  async function handleWaitlist(e) {
     e.preventDefault();
+    const emailInput = document.getElementById("waitlist-email");
+    const email = emailInput.value.trim();
+    const consent = document.getElementById("waitlist-consent").checked;
     const msg = document.getElementById("waitlist-msg");
+    const btn = e.target.querySelector("button");
+
+    if (!consent) {
+      msg.textContent = "Marque o aviso de privacidade pra continuar.";
+      msg.style.color = "var(--muted)";
+      return;
+    }
+
+    btn.disabled = true;
+    msg.textContent = "Enviando...";
+    msg.style.color = "var(--muted)";
+
+    // 1) Salva na planilha (fonte de verdade — você nunca perde o lead)
+    try {
+      await fetch(WAITLIST_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, origem: "lista-espera", consentiu: true })
+      });
+    } catch (err) { /* segue mesmo se falhar */ }
+
+    // 2) Tenta inscrever no Substack (best-effort; pode ser bloqueado)
+    try {
+      await fetch("https://" + SUBSTACK_SUB + ".substack.com/api/v1/free", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email, first_url: location.href, first_referrer: document.referrer })
+      });
+    } catch (err) { /* silencioso: a planilha já garante o registro */ }
+
     msg.textContent = "Anotado. Você recebe o aviso antes de qualquer divulgação pública.";
     msg.style.color = "var(--gold)";
-    document.getElementById("waitlist-email").disabled = true;
-    e.target.querySelector("button").disabled = true;
+    emailInput.disabled = true;
+    btn.disabled = true;
   }
 </script>
 </body>
