@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<!-- Capital do Engano package V1.4.3 · links reais dos posts inseridos -->
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Desejo que Pensa — Laboratório do Vínculo | Capital do Engano</title>
+<meta content="Desejo que Pensa é um curso-laboratório do Capital do Engano sobre desejo, defesa, vínculo, comparação e autoria." name="description"/>
+<meta content="#090909" name="theme-color"/>
+<meta content="Desejo que Pensa — Laboratório do Vínculo" property="og:title"/>
+<meta content="Quatro encontros ao vivo para homens gays sobre defesa, desejo, rivalidade e autoria." property="og:description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,500&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<style>
+/* =========================================================
+       CAPITAL DO ENGANO — SITE V1.3
+       Página principal editorial + produto Desejo que Pensa.
+       Produção: MOXNOX.
+       ========================================================= */
+    :root {
+      --hero: #090909;
+      --hero-soft: #171717;
+      --paper: #eee7d9;
+      --paper-2: #d9cfbd;
+      --ink: #0a0a0a;
+      --ink-2: #292725;
+      --muted: #69645c;
+      --red: #d11d75;
+      --error: #ff8aa9;
+      --blue: #2f55ff;
+      --acid: #c8ef32;
+      --wine: #4e142d;
+      --magenta: #df1689;
+      --white: #f2ede3;
+      --rule: rgba(10,10,10,.22);
+      --dark-rule: rgba(242,237,227,.18);
+      --max: 1240px;
+      --copy: 720px;
+      --rot-subtle: 1deg;
+      --rot-medium: 2deg;
+      --rot-loud: 5deg;
+      --shadow-sm: 4px 4px 0 #000;
+      --shadow-md: 7px 7px 0 #000;
+      --shadow-lg: 12px 12px 0 #000;
+      --border-thin: 1px;
+      --border-mid: 2px;
+      --border-heavy: 4px;
+      --hard-shadow: var(--shadow-lg);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+    body {
+      min-width: 320px;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.62;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: .035;
+      background-image:
+        repeating-radial-gradient(circle at 12% 18%, #000 0 1px, transparent 1px 4px),
+        repeating-linear-gradient(91deg, transparent 0 15px, rgba(0,0,0,.07) 15px 16px);
+      mix-blend-mode: multiply;
+    }
+    ::selection { color: var(--ink); background: var(--acid); }
+    a, button, input { font: inherit; }
+    img { display: block; max-width: 100%; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 4px;
+    }
+    .skip-link {
+      position: fixed;
+      top: 8px;
+      left: 8px;
+      z-index: 10000;
+      padding: 9px 12px;
+      color: var(--ink);
+      background: var(--acid);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      transform: translateY(-160%);
+      transition: transform .2s;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .container { width: min(100%, var(--max)); margin: 0 auto; padding-inline: 44px; }
+    .mono { font-family: 'IBM Plex Mono', monospace; }
+    .serif { font-family: 'Instrument Serif', Georgia, serif; }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* NAV ==================================================== */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 300;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 0 30px;
+      color: var(--white);
+      background: rgba(11,11,13,.95);
+      border-bottom: 1px solid rgba(216,255,63,.38);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .nav-brand {
+      color: var(--white);
+      text-decoration: none;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 13px;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav-brand span { color: var(--red); }
+    .nav-links { display: flex; align-items: center; gap: 22px; list-style: none; }
+    .nav-links a {
+      color: rgba(255,253,247,.62);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links .nav-lab {
+      position: relative;
+      padding: 8px 10px;
+      color: var(--ink);
+      background: var(--acid);
+      transform: rotate(-1deg);
+    }
+    /* HERO =================================================== */
+    #capital {
+      position: relative;
+      isolation: isolate;
+      min-height: clamp(820px, 96svh, 980px);
+      padding: 124px 0 78px;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(11,11,13,.065) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(11,11,13,.065) 1px, transparent 1px),
+        var(--hero);
+      background-size: 58px 58px, 58px 58px, auto;
+      border-bottom: 2px solid var(--ink);
+    }
+    #capital::before {
+      content: '';
+      position: absolute;
+      width: 48vw;
+      aspect-ratio: 1;
+      top: -26vw;
+      right: -12vw;
+      z-index: -1;
+      border-radius: 50%;
+      background: var(--acid);
+      border: 2px solid var(--ink);
+    }
+    #capital::after {
+      content: 'ARQUIVO / DESEJO / CULTURA / POLÍTICA DO COTIDIANO / 2026';
+      position: absolute;
+      left: -145px;
+      bottom: 168px;
+      color: rgba(11,11,13,.47);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .15em;
+      transform: rotate(-90deg);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(360px, .8fr);
+      gap: 48px;
+      align-items: center;
+    }
+    h1 {
+      max-width: 850px;
+      color: var(--ink);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(62px, 10vw, 148px);
+      font-weight: 400;
+      line-height: .79;
+      letter-spacing: -.075em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+    h1 .ghost {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--ink);
+      text-shadow: 7px 7px 0 var(--red);
+    }
+    .hero-deck {
+      max-width: 650px;
+      margin-top: 34px;
+      color: var(--ink-2);
+      font-size: clamp(18px, 2vw, 23px);
+      line-height: 1.45;
+      font-weight: 500;
+    }
+    .hero-deck em {
+      color: var(--wine);
+      font-family: 'Instrument Serif', serif;
+      font-size: 1.18em;
+      font-weight: 400;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 34px; }
+    .btn-primary, .btn-secondary, .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 13px 19px;
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .16s, box-shadow .16s, background .16s;
+    }
+    .btn-primary { color: var(--white); background: var(--ink); box-shadow: 7px 7px 0 var(--red); }
+    .btn-primary:hover { transform: translate(3px,3px); box-shadow: 4px 4px 0 var(--red); }
+    .btn-secondary { color: var(--ink); background: var(--acid); box-shadow: 7px 7px 0 var(--blue); }
+    .btn-secondary:hover { transform: translate(3px,3px); box-shadow: 4px 4px 0 var(--blue); }
+    .btn-dark { color: var(--white); background: var(--ink); border-color: var(--white); box-shadow: 7px 7px 0 var(--magenta); }
+
+
+    .ticker {
+      overflow: hidden;
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 2px solid var(--red);
+      white-space: nowrap;
+    }
+    .ticker-track {
+      display: inline-block;
+      min-width: 200%;
+      padding: 10px 0;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .11em;
+      text-transform: uppercase;
+      animation: ticker 28s linear infinite;
+    }
+    @keyframes ticker { to { transform: translateX(-50%); } }
+
+    /* SECTION SYSTEM ======================================== */
+    section:not(#capital) { position: relative; }
+    .section-pad { padding: 112px 0; }
+    .eyebrow {
+      width: fit-content;
+      margin-bottom: 17px;
+      padding: 5px 8px;
+      color: var(--white);
+      background: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .section-title {
+      max-width: 950px;
+      margin-bottom: 26px;
+      color: var(--ink);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(42px, 6.6vw, 88px);
+      font-weight: 400;
+      line-height: .92;
+      letter-spacing: -.055em;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+    .section-title .serif {
+      color: var(--red);
+      font-size: 1.05em;
+      font-weight: 400;
+      text-transform: none;
+    }
+    .section-lead {
+      max-width: var(--copy);
+      color: var(--ink-2);
+      font-size: clamp(18px, 2.1vw, 24px);
+      line-height: 1.48;
+    }
+
+
+    /* FEATURE / DQP ========================================= */
+    #desejo {
+      color: var(--white);
+      background: var(--ink);
+      border-block: 2px solid var(--red);
+    }
+    #desejo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: .17;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 82% 22%, var(--magenta), transparent 29%),
+        linear-gradient(117deg, transparent 0 58%, rgba(39,78,255,.7) 58% 59%, transparent 59%);
+    }
+    .feature-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+      gap: 70px;
+      align-items: center;
+    }
+    #desejo .eyebrow { color: var(--ink); background: var(--acid); }
+    #desejo .section-title { color: var(--white); }
+    #desejo .section-title .serif { color: var(--acid); }
+    #desejo .section-lead { color: rgba(255,253,247,.72); }
+    .feature-label {
+      display: inline-block;
+      margin: 24px 0 18px;
+      padding: 5px 8px;
+      color: var(--white);
+      background: var(--red);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      transform: rotate(-1deg);
+    }
+    .feature-copy p { max-width: 650px; margin-bottom: 16px; color: rgba(255,253,247,.68); }
+    .feature-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      margin-top: 34px;
+      border: 1px solid var(--dark-rule);
+    }
+    .feature-stat {
+      min-height: 104px;
+      padding: 17px 14px;
+      border-right: 1px solid var(--dark-rule);
+    }
+    .feature-stat:last-child { border-right: none; }
+    .feature-stat strong {
+      display: block;
+      color: var(--white);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 26px;
+      line-height: 1;
+    }
+    .feature-stat span {
+      display: block;
+      margin-top: 9px;
+      color: rgba(255,253,247,.42);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      line-height: 1.35;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+    .feature-art {
+      position: relative;
+      min-height: 620px;
+    }
+    .feature-art-main {
+      position: absolute;
+      top: 18px;
+      right: 8px;
+      width: min(430px, 88%);
+      padding: 12px;
+      background: var(--paper);
+      border: 2px solid var(--white);
+      box-shadow: 12px 12px 0 var(--red);
+      transform: rotate(2deg);
+    }
+    .feature-art-main img { width: 100%; }
+    .feature-art-small {
+      position: absolute;
+      left: -5px;
+      bottom: 4px;
+      width: min(300px, 48%);
+      padding: 9px;
+      background: var(--paper);
+      border: 2px solid var(--white);
+      box-shadow: 7px 7px 0 var(--blue);
+      transform: rotate(-5deg);
+    }
+    .feature-art-small img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1122 / 1402;
+      object-fit: contain;
+      object-position: center;
+    }
+    .feature-art-small a {
+      display: block;
+      color: inherit;
+      text-decoration: none;
+    }
+    .feature-art-small a:focus-visible {
+      outline: 3px solid var(--acid);
+      outline-offset: 5px;
+    }
+    .feature-note {
+      position: absolute;
+      right: -18px;
+      bottom: 44px;
+      width: 205px;
+      padding: 16px;
+      color: var(--ink);
+      background: var(--acid);
+      border: 2px solid var(--ink);
+      box-shadow: 7px 7px 0 var(--magenta);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      line-height: 1.4;
+      text-transform: uppercase;
+      transform: rotate(5deg);
+    }
+
+    /* QUOTE ================================================== */
+    .pullquote {
+      position: relative;
+      overflow: hidden;
+      padding: 104px 32px;
+      color: var(--ink);
+      background: var(--acid);
+      border-bottom: 2px solid var(--ink);
+    }
+    .pullquote::before {
+      content: '“';
+      position: absolute;
+      left: 1vw;
+      top: -155px;
+      color: rgba(11,11,13,.11);
+      font-family: 'Instrument Serif', serif;
+      font-size: 430px;
+      line-height: 1;
+    }
+    .pullquote blockquote {
+      position: relative;
+      max-width: 1080px;
+      margin: 0 auto;
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(38px, 5.8vw, 78px);
+      line-height: .98;
+      text-wrap: balance;
+    }
+    .pullquote footer {
+      width: fit-content;
+      margin-top: 28px;
+      padding: 5px 8px;
+      color: var(--white);
+      background: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    /* MODULES ================================================ */
+    #percurso { background: var(--paper-2); }
+    .modules-intro { max-width: 850px; margin-bottom: 54px; }
+    .modules-intro p { max-width: 620px; color: var(--muted); }
+    .module-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .module-card {
+      position: relative;
+      min-height: 360px;
+      padding: 28px;
+      overflow: hidden;
+      background: var(--white);
+      border: 2px solid var(--ink);
+      box-shadow: 7px 7px 0 rgba(11,11,13,.13);
+      transition: transform .18s, box-shadow .18s;
+    }
+    .module-card:hover { transform: translate(-3px,-3px); box-shadow: 12px 12px 0 var(--red); }
+    .module-card:nth-child(2) { background: var(--hero-soft); }
+    .module-card:nth-child(3) { color: var(--white); background: var(--wine); }
+    .module-card:nth-child(4) { color: var(--white); background: var(--ink); }
+    .module-index {
+      color: var(--red);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 68px;
+      line-height: .8;
+    }
+    .module-card:nth-child(n+3) .module-index { color: var(--acid); }
+    .module-card h3 {
+      max-width: 500px;
+      margin-top: 34px;
+      font-family: 'Archivo Black', sans-serif;
+      font-size: clamp(27px, 3vw, 42px);
+      font-weight: 400;
+      line-height: .95;
+      letter-spacing: -.04em;
+      text-transform: uppercase;
+    }
+    .module-thesis {
+      margin-top: 12px;
+      color: var(--red-dark);
+      font-family: 'Instrument Serif', serif;
+      font-size: 22px;
+      line-height: 1.13;
+    }
+    .module-card:nth-child(n+3) .module-thesis { color: var(--acid); }
+    .module-desc {
+      max-width: 540px;
+      margin-top: 18px;
+      color: var(--ink-2);
+      font-size: 14px;
+    }
+    .module-card:nth-child(n+3) .module-desc { color: rgba(255,253,247,.68); }
+    .module-refs {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 24px;
+      padding-top: 12px;
+      color: var(--muted);
+      border-top: 1px dashed currentColor;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .module-card:nth-child(n+3) .module-refs { color: rgba(255,253,247,.42); }
+
+
+    /* FOR WHO ================================================ */
+    #paraquem { color: var(--white); background: var(--red-dark); }
+    #paraquem .eyebrow { color: var(--ink); background: var(--acid); }
+    #paraquem .section-title { color: var(--white); }
+    #paraquem .section-title .serif { color: var(--acid); }
+    .prompt-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      margin-top: 54px;
+      background: rgba(255,253,247,.22);
+      border: 1px solid rgba(255,253,247,.22);
+    }
+    .prompt-card {
+      min-height: 230px;
+      padding: 28px;
+      background: var(--red-dark);
+    }
+    .prompt-card b {
+      display: block;
+      color: var(--acid);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+    }
+    .prompt-card q {
+      display: block;
+      margin-top: 20px;
+      color: var(--white);
+      font-family: 'Instrument Serif', serif;
+      font-size: 29px;
+      line-height: 1.08;
+    }
+    .prompt-card p { margin-top: 15px; color: rgba(255,253,247,.58); font-size: 13px; }
+
+    /* FORM =================================================== */
+    #turmas { background: var(--hero-soft); }
+    .form-grid {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(420px, 1.15fr);
+      gap: 82px;
+      align-items: start;
+    }
+    .form-copy p { max-width: 540px; color: var(--ink-2); }
+    .route-links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+    .signup-card {
+      position: relative;
+      padding: 34px;
+      background: var(--white);
+      border: 2px solid var(--ink);
+      box-shadow: 12px 12px 0 var(--red);
+    }
+    .signup-card::before {
+      content: 'FORMULÁRIO DAS TURMAS';
+      position: absolute;
+      top: -14px;
+      left: 26px;
+      padding: 5px 8px;
+      color: var(--white);
+      background: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+    .form-row { margin-bottom: 24px; }
+    .field-label {
+      display: block;
+      margin-bottom: 9px;
+      color: var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .email-input {
+      width: 100%;
+      min-height: 52px;
+      padding: 13px 15px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 0;
+      outline: none;
+    }
+    .email-input::placeholder { color: var(--muted); }
+    .toggle-group {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .toggle-option { position: relative; }
+    .toggle-option input { position: absolute; opacity: 0; pointer-events: none; }
+    .toggle-option label {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 12px;
+      color: var(--ink);
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background .16s, color .16s, transform .16s;
+    }
+    .toggle-option input:checked + label {
+      color: var(--white);
+      background: var(--red);
+      box-shadow: 4px 4px 0 var(--ink);
+      transform: translate(-2px,-2px);
+    }
+    .toggle-option input:focus-visible + label { outline: 3px solid var(--blue); outline-offset: 3px; }
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin: 20px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+      cursor: pointer;
+    }
+    .consent-row input { margin-top: 3px; accent-color: var(--red); }
+    .submit-btn {
+      width: 100%;
+      min-height: 52px;
+      color: var(--white);
+      background: var(--ink);
+      border: 2px solid var(--ink);
+      box-shadow: 7px 7px 0 var(--red);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform .16s, box-shadow .16s;
+    }
+    .submit-btn:hover { transform: translate(3px,3px); box-shadow: 4px 4px 0 var(--red); }
+    .submit-btn:disabled { opacity: .6; cursor: default; }
+    #form-msg {
+      min-height: 20px;
+      margin-top: 16px;
+      color: var(--muted);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .hp-field { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+
+    /* FOOTER ================================================= */
+    footer {
+      padding: 34px 30px 20px;
+      color: rgba(255,253,247,.58);
+      background: var(--ink);
+      border-top: 1px solid var(--acid);
+    }
+    .footer-main {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding-inline: 14px;
+    }
+    .footer-brand {
+      color: var(--white);
+      font-family: 'Archivo Black', sans-serif;
+      font-size: 13px;
+      letter-spacing: -.02em;
+      text-transform: uppercase;
+    }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
+    .footer-links a {
+      color: rgba(255,253,247,.58);
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .footer-links a:hover { color: var(--acid); }
+    .moxnox-credit {
+      width: min(100%, var(--max));
+      margin: 18px auto 0;
+      padding: 12px 14px 0;
+      color: rgba(255,253,247,.2);
+      border-top: 1px solid rgba(255,253,247,.08);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .12em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    /* ROUTE DESEJO QUE PENSA — V1.3.1 ======================= */
+    body.route-dqp {
+      color: var(--white);
+      background-color: var(--paper);
+      background-image: radial-gradient(rgba(0,0,0,.09) .55px, transparent .65px);
+      background-size: 4px 4px;
+    }
+    body.route-dqp::before { opacity: .045; mix-blend-mode: screen; }
+    body.route-dqp nav {
+      background: rgba(6,6,6,.97);
+      border-bottom: var(--border-thin) solid rgba(223,22,137,.55);
+    }
+    body.route-dqp .nav-brand span { color: var(--magenta); }
+    body.route-dqp .nav-links { gap: 8px; }
+    body.route-dqp .nav-links a {
+      display: inline-flex;
+      min-height: 44px;
+      align-items: center;
+      padding: 0 10px;
+      color: rgba(242,237,227,.78);
+      font-size: 11px;
+    }
+    body.route-dqp .nav-links a:hover,
+    body.route-dqp .nav-links a:focus-visible { color: var(--white); }
+    body.route-dqp .nav-links .nav-lab {
+      color: var(--ink);
+      background: var(--paper);
+      box-shadow: var(--shadow-sm);
+      transform: rotate(calc(-1 * var(--rot-subtle)));
+    }
+    body.route-dqp .nav-links .nav-lab::before { display: none; }
+    body.route-dqp .nav-links .nav-turmas {
+      color: var(--ink);
+      background: var(--acid);
+    }
+
+    body.route-dqp #capital {
+      min-height: 900px;
+      padding-top: 118px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 75% 20%, rgba(223,22,137,.16), transparent 28%),
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+        #090909;
+      background-size: auto, 44px 44px, 44px 44px, auto;
+      border-bottom: 0;
+    }
+    body.route-dqp #capital::before { display: none; }
+    body.route-dqp #capital::after { color: rgba(242,237,227,.42); font-size: 11px; }
+    body.route-dqp .hero-grid {
+      grid-template-columns: minmax(0,.82fr) minmax(520px,1.18fr);
+      gap: 58px;
+      align-items: center;
+    }
+    body.route-dqp .hero-copy-block { position: relative; z-index: 5; }
+    body.route-dqp .hero-kicker {
+      display: inline;
+      padding: 4px 8px;
+      color: #080808;
+      background: var(--acid);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+    body.route-dqp #capital h1 {
+      margin: 26px 0 30px;
+      color: var(--white);
+      font-size: clamp(64px,9vw,144px);
+      line-height: .78;
+      letter-spacing: -.07em;
+      text-shadow: 4px 4px 0 rgba(223,22,137,.7);
+    }
+    body.route-dqp #capital h1 .ghost {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--white);
+      text-shadow: var(--shadow-md);
+    }
+    body.route-dqp .hero-deck {
+      max-width: 610px;
+      color: rgba(242,237,227,.86);
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-size: clamp(18px,1.5vw,20px);
+      font-weight: 500;
+      line-height: 1.52;
+    }
+    body.route-dqp .hero-actions .btn-primary {
+      color: #fff;
+      background: var(--magenta);
+      border-width: var(--border-mid);
+      box-shadow: var(--shadow-md);
+    }
+    body.route-dqp .hero-actions .btn-secondary {
+      color: var(--white);
+      background: transparent;
+      border-color: var(--paper);
+      border-width: var(--border-mid);
+      box-shadow: var(--shadow-md);
+    }
+    body.route-dqp .hero-actions .btn-dark {
+      border-width: var(--border-mid);
+      box-shadow: var(--shadow-md);
+    }
+    body.route-dqp .hero-zine { position: relative; min-height: 650px; isolation: isolate; }
+    body.route-dqp .zine-main,
+    body.route-dqp .zine-cut {
+      position: absolute;
+      overflow: hidden;
+      background: #000;
+      border: var(--border-mid) solid var(--paper);
+      box-shadow: var(--shadow-lg);
+    }
+    body.route-dqp .zine-main { inset: 18px 44px 24px 90px; transform: rotate(var(--rot-subtle)); }
+    body.route-dqp .zine-main img,
+    body.route-dqp .zine-cut img { width: 100%; height: 100%; object-fit: cover; }
+    body.route-dqp .zine-cut { width: 34%; height: 42%; }
+    body.route-dqp .zine-cut-a { left: 0; top: 72px; transform: rotate(calc(-1 * var(--rot-loud))); }
+    body.route-dqp .zine-cut-b { right: 0; bottom: 8px; transform: rotate(var(--rot-loud)); }
+    body.route-dqp .zine-note {
+      position: absolute;
+      right: 5px;
+      top: 20px;
+      z-index: 7;
+      padding: 11px 14px;
+      color: var(--white);
+      background: #111;
+      border: var(--border-mid) solid var(--paper);
+      box-shadow: var(--shadow-md);
+      font: 700 16px/1.2 'IBM Plex Mono', monospace;
+      transform: rotate(var(--rot-loud));
+    }
+    body.route-dqp .zine-note strong { color: var(--magenta); }
+    body.route-dqp .zine-tape {
+      position: absolute;
+      z-index: 8;
+      width: 120px;
+      height: 30px;
+      background: rgba(226,213,183,.76);
+      filter: saturate(.7);
+      transform: rotate(calc(-1 * var(--rot-loud)));
+    }
+    body.route-dqp .zine-tape-a { left: 60px; top: 10px; }
+    body.route-dqp .zine-tape-b { right: 34px; bottom: 62px; transform: rotate(var(--rot-loud)); }
+    body.route-dqp .ticker { color: #090909; background: var(--magenta); border-color: #090909; }
+    body.route-dqp .ticker-track { font-size: 11px; font-weight: 800; }
+
+    body.route-dqp #desejo {
+      color: var(--white);
+      background: #090909;
+      border-block: var(--border-thin) solid rgba(242,237,227,.14);
+    }
+    body.route-dqp #desejo .section-title,
+    body.route-dqp #desejo p { color: inherit; }
+    body.route-dqp #desejo .section-lead { color: rgba(242,237,227,.8); }
+    body.route-dqp .eyebrow,
+    body.route-dqp .module-index { color: var(--magenta); }
+    body.route-dqp .feature-label { color: #090909; background: var(--acid); }
+    body.route-dqp .feature-art-main,
+    body.route-dqp .feature-art-small { background: #050505; border-color: #050505; }
+    body.route-dqp .feature-art-main img,
+    body.route-dqp .feature-art-small img { filter: saturate(.78) contrast(1.06); }
+    body.route-dqp .feature-stat span { color: rgba(242,237,227,.78); font-size: 13px; }
+
+    body.route-dqp .module-card { border-width: var(--border-mid); box-shadow: var(--shadow-lg); }
+    body.route-dqp .module-card:nth-child(2) { color: var(--ink); background: var(--acid); }
+    body.route-dqp .module-card:nth-child(2) .module-desc,
+    body.route-dqp .module-card:nth-child(2) .module-refs,
+    body.route-dqp .module-card:nth-child(2) .module-thesis { color: #24250d; }
+    body.route-dqp .module-card:nth-child(3) { color: #fff; background: var(--blue); }
+    body.route-dqp .module-card:nth-child(4) { color: #fff; background: var(--magenta); }
+    body.route-dqp .module-card:nth-child(3) .module-desc,
+    body.route-dqp .module-card:nth-child(3) .module-refs,
+    body.route-dqp .module-card:nth-child(3) .module-thesis,
+    body.route-dqp .module-card:nth-child(4) .module-desc,
+    body.route-dqp .module-card:nth-child(4) .module-refs,
+    body.route-dqp .module-card:nth-child(4) .module-thesis { color: #fff; }
+    body.route-dqp .module-refs { font-size: 11px; }
+    body.route-dqp .pullquote { color: var(--ink); background: var(--paper); border-block: var(--border-mid) solid var(--ink); }
+
+    body.route-dqp #paraquem { background: #0a0a0a; }
+    body.route-dqp .prompt-card { background: #121212; border-color: rgba(242,237,227,.18); }
+
+    body.route-dqp #turmas { color: var(--ink); background: var(--paper); }
+    body.route-dqp #turmas .form-copy p { color: #35312c; }
+    body.route-dqp .signup-card {
+      color: var(--white);
+      background: #0b0b0b;
+      border: var(--border-mid) solid #000;
+      box-shadow: 12px 12px 0 var(--magenta);
+    }
+    body.route-dqp .signup-card::before { font-size: 11px; }
+    body.route-dqp .signup-card .field-label,
+    body.route-dqp .signup-card legend { color: var(--white); font-size: 13px; }
+    body.route-dqp .email-input { border-width: var(--border-mid); }
+    body.route-dqp .toggle-option label {
+      min-height: 48px;
+      color: var(--white);
+      background: #171717;
+      border: var(--border-mid) solid #d1c7bb;
+      font-size: 13px;
+    }
+    body.route-dqp .toggle-option input:checked + label { color: #090909; background: var(--acid); box-shadow: var(--shadow-sm); }
+    body.route-dqp .consent-row {
+      min-height: 44px;
+      align-items: center;
+      color: rgba(242,237,227,.84);
+      font-size: 14px;
+    }
+    body.route-dqp .consent-row input {
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      flex: 0 0 24px;
+      accent-color: var(--magenta);
+    }
+    body.route-dqp .submit-btn { color: #fff; background: var(--magenta); border-width: var(--border-mid); box-shadow: var(--shadow-md); }
+    body.route-dqp #form-msg { color: rgba(242,237,227,.78); font-size: 13px; }
+    body.route-dqp #form-msg[data-state="success"] { color: var(--acid); }
+    body.route-dqp #form-msg[data-state="error"] { color: var(--error); }
+
+    body.route-dqp footer { background: #050505; }
+    body.route-dqp .footer-links a { display: inline-flex; min-height: 44px; align-items: center; font-size: 11px; }
+    body.route-dqp .moxnox-credit { color: rgba(255,253,247,.62); font-size: 11px; }
+
+    @media (max-width: 1000px) {
+      body.route-dqp #capital { min-height: auto; }
+      body.route-dqp .hero-grid,
+      body.route-dqp .feature-grid,
+      body.route-dqp .form-grid { grid-template-columns: 1fr; }
+      body.route-dqp .hero-zine { min-height: 580px; }
+      body.route-dqp .zine-main { inset: 20px 35px; }
+      body.route-dqp .zine-cut { width: 32%; }
+      body.route-dqp .feature-art { min-height: 640px; max-width: 650px; margin: 0 auto; width: 100%; }
+      body.route-dqp .prompt-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 760px) {
+      .container { padding-inline: 18px; }
+      body.route-dqp nav { padding-inline: 12px; }
+      body.route-dqp .nav-links { gap: 2px; }
+      body.route-dqp .nav-links .hide-sm { display: none; }
+      body.route-dqp .nav-brand { font-size: 11px; }
+      body.route-dqp .nav-links a { padding-inline: 7px; }
+      body.route-dqp #capital { padding-top: 102px; }
+      body.route-dqp #capital h1 { font-size: clamp(55px,19vw,88px); }
+      body.route-dqp .hero-deck { font-size: 18px; }
+      body.route-dqp .hero-zine { min-height: 470px; }
+      body.route-dqp .zine-main { inset: 22px 12px 20px 24px; }
+      body.route-dqp .zine-cut-a { width: 38%; height: 35%; top: 110px; }
+      body.route-dqp .zine-cut-b { width: 38%; height: 34%; }
+      body.route-dqp .section-pad { padding: 82px 0; }
+      body.route-dqp .section-title { font-size: clamp(39px,12vw,67px); }
+      body.route-dqp .feature-stats { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      body.route-dqp .module-grid,
+      body.route-dqp .prompt-grid { grid-template-columns: 1fr; }
+      body.route-dqp .signup-card { padding: 30px 20px; }
+      body.route-dqp .footer-main { flex-direction: column; align-items: flex-start; }
+      body.route-dqp .moxnox-credit { text-align: left; }
+    }
+    @media (max-width: 480px) {
+      body.route-dqp .hero-actions,
+      body.route-dqp .route-links { flex-direction: column; align-items: stretch; }
+      body.route-dqp .btn-primary,
+      body.route-dqp .btn-secondary,
+      body.route-dqp .btn-dark { width: 100%; }
+      body.route-dqp .hero-zine { min-height: 430px; }
+      body.route-dqp .toggle-group { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+  
+    .ig-post-link { display: block; color: inherit; text-decoration: none; }
+    .ig-post-link img { transition: filter .18s ease, transform .18s ease; }
+    .ig-post-link:hover img { filter: saturate(.92) contrast(1.08); }
+    .ig-post-link:focus-visible { outline: 3px solid var(--acid); outline-offset: 4px; }
+</style>
+</head>
+<body class="route-dqp">
+<a class="skip-link" href="#main">Pular para o conteúdo</a>
+<nav aria-label="Navegação principal">
+<a class="nav-brand" href="../">Capital do <span>Engano</span></a>
+<ul class="nav-links">
+<li><a href="../">Home</a></li>
+<li class="hide-sm"><a href="#percurso">Percurso</a></li>
+<li class="hide-sm"><a href="#paraquem">Para quem</a></li>
+<li><a aria-current="page" class="nav-lab" href="#capital">Lab</a></li>
+<li><a class="nav-turmas" href="#turmas">Turmas</a></li>
+</ul>
+</nav>
+<main id="main">
+<header id="capital">
+<div class="container hero-grid">
+<div class="hero-copy-block">
+<p class="hero-kicker">Laboratório do vínculo em tempos de rolagem.</p>
+<h1>Desejo que <span class="ghost">Pensa</span></h1>
+<p class="hero-deck">Quatro encontros ao vivo para homens gays: defesa, desejo, rivalidade e autoria. A conversa começa onde o feed termina.</p>
+<div class="hero-actions">
+<a class="btn-primary" href="#turmas">Escolher turma <span aria-hidden="true">↘</span></a>
+<a class="btn-secondary" href="../">Voltar ao Capital <span aria-hidden="true">→</span></a>
+</div>
+</div>
+<div aria-label="Colagem editorial do Capital do Engano" class="hero-zine">
+<span class="zine-tape zine-tape-a"></span><span class="zine-tape zine-tape-b"></span>
+<figure class="zine-main"><a aria-label="Abrir no Instagram o post Cartografia da Couraça" class="ig-post-link" href="https://www.instagram.com/p/DagaPlej9QJ/" rel="noopener noreferrer" target="_blank" title="Abrir no Instagram o post Cartografia da Couraça"><img alt="Capa Cartografia da Couraça, referência visual do projeto" height="1402" src="../assets/dqp-modulo1.png" width="1122"/></a></figure>
+<figure class="zine-cut zine-cut-a"><a aria-label="Abrir no Instagram o post sobre dados, apps e desejo" class="ig-post-link" href="https://www.instagram.com/p/DaJt7K4jVhq/" rel="noopener noreferrer" target="_blank" title="Abrir no Instagram o post sobre dados, apps e desejo"><img alt="Recorte do carrossel sobre dados e desejo" height="1254" src="../assets/grindr-carousel.png" width="1254"/></a></figure>
+<figure class="zine-cut zine-cut-b"><a aria-label="Abrir no Instagram o carrossel Desejo que Pensa" class="ig-post-link" href="https://www.instagram.com/p/DaZJoE9jdEI/" rel="noopener noreferrer" target="_blank" title="Abrir no Instagram o carrossel Desejo que Pensa"><img alt="Recorte de carrossel do Desejo que Pensa" height="1254" src="../assets/dqp-carousel.png" width="1254"/></a></figure>
+<div class="zine-note">não é bug.<br/><strong>é feature.</strong></div>
+</div>
+</div>
+</header>
+<div aria-hidden="true" class="ticker">
+<div class="ticker-track">
+        CONTATO NÃO É VÍNCULO · DESEJO NÃO É DESTINO · O CORPO ENTENDE ANTES DO ALGORITMO ADMITIR · PRESTÍGIO TAMBÉM EDUCA O OLHAR · CAPITAL DO ENGANO ·
+        CONTATO NÃO É VÍNCULO · DESEJO NÃO É DESTINO · O CORPO ENTENDE ANTES DO ALGORITMO ADMITIR · PRESTÍGIO TAMBÉM EDUCA O OLHAR · CAPITAL DO ENGANO ·
+      </div>
+</div>
+<section class="section-pad" id="desejo">
+<div class="container feature-grid">
+<div class="feature-copy">
+<div class="eyebrow">Categoria / curso-laboratório</div>
+<h2 class="section-title">Desejo que <span class="serif">Pensa.</span></h2>
+<p class="section-lead">
+            O feed funciona como espelho. O Lab começa onde a rolagem termina: quando alguém fica para elaborar o que reconheceu.
+          </p>
+<span class="feature-label">Laboratório do vínculo em tempos de rolagem</span>
+<p>
+            Quatro encontros online e ao vivo para homens gays. Um percurso sobre defesa, desejo, rivalidade e autoria, com rigor conceitual sem a pose universitária e conversa sem promessa de cura instantânea.
+          </p>
+<p>
+            É curso, conteúdo e experiência coletiva. Não é atendimento clínico, nem fórmula de relacionamento bem-sucedido. Aqui a pergunta não vira slogan antes de virar pensamento.
+          </p>
+<div aria-label="Formato do curso-laboratório" class="feature-stats">
+<div class="feature-stat"><strong>4</strong><span>encontros</span></div>
+<div class="feature-stat"><strong>60</strong><span>minutos cada</span></div>
+<div class="feature-stat"><strong>TER</strong><span>turma de terça</span></div>
+<div class="feature-stat"><strong>QUI</strong><span>turma de quinta</span></div>
+</div>
+<div class="hero-actions">
+<a class="btn-secondary" href="#percurso">Ver o percurso</a>
+<a class="btn-dark" href="#turmas">Inscrição para a reprise</a>
+</div>
+</div>
+<div aria-label="Arquivo visual do Desejo que Pensa" class="feature-art">
+<figure class="feature-art-main">
+<a aria-label="Abrir no Instagram o carrossel Desejo que Pensa" class="ig-post-link" href="https://www.instagram.com/p/DaZJoE9jdEI/" rel="noopener noreferrer" target="_blank" title="Abrir no Instagram o carrossel Desejo que Pensa"><img alt="Post Se isso te leu, talvez você precise ouvir o resto" height="1254" src="../assets/dqp-carousel.png" width="1254"/></a>
+</figure>
+<figure class="feature-art-small">
+<!-- Troque o href abaixo pela URL exata do post no Instagram. -->
+<a aria-label="Abrir no Instagram o post Procura amor, mas negocia por migalha" class="ig-post-link" href="https://www.instagram.com/p/DaG-AF5jT24/" rel="noopener noreferrer" target="_blank" title="Abrir no Instagram o post Procura amor, mas negocia por migalha">
+<img alt="Post Procura amor, mas negocia por migalha" height="1402" loading="lazy" src="../assets/post-procura.webp" width="1122"/>
+</a>
+</figure>
+<div class="feature-note">Curso ao vivo. Sem limite anunciado. A conversa continua aberta.</div>
+</div>
+</div>
+</section>
+<div class="pullquote">
+<blockquote>
+        Talvez você não seja frio. Talvez sua defesa só tenha virado o idioma que fala primeiro.
+        <footer>Desejo que Pensa · hipótese de trabalho</footer>
+</blockquote>
+</div>
+<section class="section-pad" id="percurso">
+<div class="container">
+<div class="modules-intro">
+<div class="eyebrow">Percurso / 4 encontros</div>
+<h2 class="section-title">Do corpo até a <span class="serif">autoria.</span></h2>
+<p>Cada encontro funciona sozinho. Juntos, formam uma espiral: defesa, desejo, comparação e criação.</p>
+</div>
+<div class="module-grid">
+<article class="module-card">
+<div class="module-index">I</div>
+<h3>Cartografia da Couraça</h3>
+<p class="module-thesis">como o corpo aprende a se defender antes do encontro</p>
+<p class="module-desc">Frieza, independência e seletividade podem ser nomes sofisticados para uma defesa antiga. O corpo fecha antes da explicação chegar.</p>
+<p class="module-refs">Jurandir Freire Costa · Reich · Bowlby · Ilan Meyer</p>
+</article>
+<article class="module-card">
+<div class="module-index">II</div>
+<h3>Máquinas de Desejar</h3>
+<p class="module-thesis">quem ensinou o seu corpo a querer do jeito que ele quer</p>
+<p class="module-desc">O gosto pessoal já foi atravessado por norma, escassez, imagem, prestígio e algoritmo. Desejo é íntimo; inocente, nem sempre.</p>
+<p class="module-refs">Miskolci · Foucault · Deleuze &amp; Guattari · Preciado</p>
+</article>
+<article class="module-card">
+<div class="module-index">III</div>
+<h3>Narciso em Campo de Batalha</h3>
+<p class="module-thesis">quando o outro vira espelho, juiz e concorrente</p>
+<p class="module-desc">Admiração, desejo, inveja e rivalidade podem ocupar a mesma cena. O semelhante deixa de ser neutro e vira medida do próprio valor.</p>
+<p class="module-refs">Jurandir Freire Costa · Klein · Kohut</p>
+</article>
+<article class="module-card">
+<div class="module-index">IV</div>
+<h3>Escrevivência do Afeto</h3>
+<p class="module-thesis">sair da linguagem do sintoma e entrar na autoria</p>
+<p class="module-desc">Compreender não basta. Quando a experiência ganha linguagem, forma e gesto, o sujeito começa a responder de outro lugar.</p>
+<p class="module-refs">Conceição Evaristo · Geni Núñez · Winnicott · Deleuze &amp; Guattari</p>
+</article>
+</div>
+</div>
+</section>
+<section class="section-pad" id="paraquem">
+<div class="container">
+<div class="eyebrow">Para quem o Lab existe</div>
+<h2 class="section-title">Para quem cansou de se reconhecer e <span class="serif">ir embora.</span></h2>
+<p class="section-lead" style="color:rgba(255,253,247,.68);">Não é preciso chegar com teoria. Basta chegar com uma pergunta que ainda não coube no chat.</p>
+<div class="prompt-grid">
+<article class="prompt-card"><b>01</b><q>Tenho contato, mas saio com mais vazio.</q><p>Apps, conversa, sexo — e a sensação de que alguma coisa não fecha.</p></article>
+<article class="prompt-card"><b>02</b><q>Fecho antes de saber se seria rejeitado.</q><p>O organismo decide antes da escolha consciente. Isso tem história.</p></article>
+<article class="prompt-card"><b>03</b><q>Admiro outros gays com um peso que não entendo.</q><p>O outro vira objeto de desejo e régua de valor ao mesmo tempo.</p></article>
+<article class="prompt-card"><b>04</b><q>Chamo de paz o que talvez seja distância.</q><p>Independência e seletividade também podem proteger uma ferida.</p></article>
+<article class="prompt-card"><b>05</b><q>Tenho repertório, mas nunca elaborei em grupo.</q><p>O Lab oferece tempo para uma conversa que o feed interrompe.</p></article>
+<article class="prompt-card"><b>06</b><q>Quero pensamento, não uma resposta para postar.</q><p>A pergunta pode ficar aberta sem virar falta de profundidade.</p></article>
+</div>
+</div>
+</section>
+<section class="section-pad" id="turmas">
+<div class="container form-grid">
+<div class="form-copy">
+<div class="eyebrow">Mailing + formulário das turmas</div>
+<h2 class="section-title">Escolha quando a conversa <span class="serif">continua.</span></h2>
+<p>
+            Deixe seu email, escolha terça ou quinta e indique se você quer a próxima turma ou a reprise. O dado segue para a mesma base de inscrições já usada pelo projeto.
+          </p>
+<div class="route-links">
+<a class="btn-primary" href="https://instagram.com/ogustavosouzapauli" id="channel-link" rel="noopener" target="_blank">Entrar no canal</a>
+<button class="btn-secondary" id="reprise-cta" type="button">Quero a reprise</button>
+</div>
+</div>
+<form aria-label="Inscrição nas turmas do Desejo que Pensa" class="signup-card" id="signup-form">
+<label class="hp-field" for="website">Não preencha este campo</label>
+<input autocomplete="off" class="hp-field" id="website" name="website" tabindex="-1" type="text"/>
+<div class="form-row">
+<label class="field-label" for="signup-email">Seu email</label>
+<input autocomplete="email" class="email-input" id="signup-email" inputmode="email" name="email" placeholder="seu@email.com" required="" type="email"/>
+</div>
+<fieldset class="form-row" style="border:0;">
+<legend class="field-label">Qual turma funciona melhor?</legend>
+<div class="toggle-group">
+<div class="toggle-option">
+<input id="turma-terca" name="turma" required="" type="radio" value="terça"/>
+<label for="turma-terca">Terça-feira</label>
+</div>
+<div class="toggle-option">
+<input id="turma-quinta" name="turma" required="" type="radio" value="quinta"/>
+<label for="turma-quinta">Quinta-feira</label>
+</div>
+</div>
+</fieldset>
+<fieldset class="form-row" style="border:0;">
+<legend class="field-label">O que você quer receber?</legend>
+<div class="toggle-group">
+<div class="toggle-option">
+<input checked="" id="interesse-turma" name="interesse" required="" type="radio" value="próxima turma"/>
+<label for="interesse-turma">Próxima turma</label>
+</div>
+<div class="toggle-option">
+<input id="interesse-reprise" name="interesse" required="" type="radio" value="reprise"/>
+<label for="interesse-reprise">Reprise</label>
+</div>
+</div>
+</fieldset>
+<label class="consent-row" for="signup-consent">
+<input id="signup-consent" required="" type="checkbox"/>
+<span>Concordo em receber o mailing do Capital do Engano e informações sobre as turmas do Desejo que Pensa. Posso sair quando quiser.</span>
+</label>
+<button class="submit-btn" type="submit">Registrar minha escolha</button>
+<p aria-live="polite" id="form-msg" role="status">Sem spam. Só conteúdo e avisos do projeto.</p>
+</form>
+</div>
+</section>
+</main>
+<footer>
+<div class="footer-main">
+<div class="footer-brand">Capital do Engano · 2026</div>
+<div class="footer-links">
+<a href="https://instagram.com/ogustavosouzapauli" rel="noopener" target="_blank">Instagram</a>
+<a aria-current="page" href="#capital">Desejo que Pensa</a>
+<a href="#turmas">Turmas</a>
+<a href="mailto:psiconautas.edu@gmail.com">Contato</a>
+</div>
+</div>
+<div class="moxnox-credit">uma publicação produzida por MOXNOX</div>
+</footer>
+<script>
+    const WAITLIST_URL = "https://script.google.com/macros/s/AKfycbwE1TP3rlB1O0qRy0z5vCGykCmvIBW3Lno3E7piBQ4o6Q2IGUBmtldZoic3BW1UB5qa/exec";
+
+    function setInterest(mode) {
+      const target = mode === 'reprise' ? 'interesse-reprise' : 'interesse-turma';
+      const input = document.getElementById(target);
+      if (input) input.checked = true;
+      document.getElementById('turmas')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      window.setTimeout(() => document.getElementById('signup-email')?.focus(), 450);
+    }
+
+    async function handleSignup(event) {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      const email = document.getElementById('signup-email').value.trim();
+      const turma = form.querySelector('input[name="turma"]:checked')?.value || '';
+      const interesse = form.querySelector('input[name="interesse"]:checked')?.value || '';
+      const consentiu = document.getElementById('signup-consent').checked;
+      const honeypot = document.getElementById('website').value.trim();
+      const button = form.querySelector('button[type="submit"]');
+      const message = document.getElementById('form-msg');
+
+      message.dataset.state = '';
+      if (honeypot) return;
+      if (!email || !turma || !interesse || !consentiu) {
+        message.textContent = 'Preencha o email, escolha a turma e confirme o consentimento.';
+        message.dataset.state = 'error';
+        return;
+      }
+
+      button.disabled = true;
+      message.textContent = 'Enviando para processamento…';
+
+      const payload = {
+        email,
+        turma,
+        interesse,
+        origem: 'capital-do-engano-dqp-v1.3.1',
+        consentiu: true,
+        pagina: window.location.href,
+        referrer: document.referrer || '',
+        enviado_em: new Date().toISOString()
+      };
+
+      try {
+        await fetch(WAITLIST_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        message.textContent = `Enviado para processamento: ${interesse}, preferência de ${turma}. O endpoint atual não confirma o recebimento no navegador; aguarde o próximo aviso por email.`;
+        message.dataset.state = 'success';
+      } catch (error) {
+        console.error(error);
+        message.textContent = 'Não foi possível iniciar o envio agora. Revise sua conexão e tente novamente.';
+        message.dataset.state = 'error';
+      } finally {
+        button.disabled = false;
+      }
+    }
+
+    document.getElementById('signup-form')?.addEventListener('submit', handleSignup);
+    document.getElementById('reprise-cta')?.addEventListener('click', () => setInterest('reprise'));
+  </script>
+</body>
+</html>
