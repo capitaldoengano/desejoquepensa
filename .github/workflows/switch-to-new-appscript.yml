@@ -1,0 +1,31 @@
+name: Trocar para novo Apps Script oficial
+on:
+  push:
+    paths:
+      - '.github/workflows/switch-to-new-appscript.yml'
+permissions:
+  contents: write
+jobs:
+  switch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Trocar endpoint
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          old='https://script.google.com/macros/s/AKfycbwLwXu7yA2k3YvWyBqOMSSfnzRwR58wXxqY4SEbpK5EW2DYldIZgKlH9GmjTxIQWyBG/exec'
+          new='https://script.google.com/macros/s/AKfycbwudZe7GGlJAeFAsedaU-PXbKkB0t-PK3pkmAcOu8FNgecoTLgBZhCQ54mei_p_lXkV/exec'
+          if old not in s:
+              raise SystemExit('endpoint antigo não encontrado')
+          p.write_text(s.replace(old,new),encoding='utf-8')
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "liga formulário ao Apps Script v3 oficial"
+          git push
