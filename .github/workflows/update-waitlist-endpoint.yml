@@ -1,4 +1,4 @@
-name: Corrigir formulário de inscrições
+name: Atualizar formulario de inscricoes
 
 on:
   push:
@@ -9,44 +9,32 @@ permissions:
   contents: write
 
 jobs:
-  fix-form:
+  update-form:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Corrigir POST do formulário
+      - name: Atualizar envio do formulario
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           text = p.read_text(encoding='utf-8')
-          old = """      const payload={email,origem:'capital-do-engano-home-v1.5',consentiu:true,turma,interesse};
-      try{await fetch(WAITLIST_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){}"""
-          new = """      const payload=new URLSearchParams({
-        email,
-        origem:'capital-do-engano-home-v1.5',
-        consentiu:'true',
-        turma,
-        interesse
-      });
-      try{
-        await fetch(WAITLIST_URL,{
-          method:'POST',
-          mode:'no-cors',
-          headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
-          body:payload.toString()
-        });
-      }catch(e){}"""
-          if old not in text:
-              raise SystemExit('Trecho antigo do formulário não encontrado em index.html')
-          p.write_text(text.replace(old,new),encoding='utf-8')
+          old1 = "const payload={email,origem:'capital-do-engano-home-v1.5',consentiu:true,turma,interesse};"
+          new1 = "const payload=new URLSearchParams({email,origem:'capital-do-engano-home-v1.5',consentiu:'true',turma,interesse});"
+          old2 = "try{await fetch(WAITLIST_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){}"
+          new2 = "try{await fetch(WAITLIST_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:payload.toString()});}catch(e){}"
+          if old1 not in text or old2 not in text:
+              raise SystemExit('Trecho esperado nao encontrado')
+          text = text.replace(old1, new1).replace(old2, new2)
+          p.write_text(text, encoding='utf-8')
           PY
 
-      - name: Commit da correção
+      - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "corrige captura de turma e interesse"
+          git commit -m "corrige envio de turma e interesse"
           git push
