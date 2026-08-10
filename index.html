@@ -379,8 +379,8 @@
       if(honeypot)return;
       if(!consent){msg.textContent='Marque o consentimento para continuar.';msg.style.color='#ff8aa9';return;}
       button.disabled=true;msg.textContent='Enviando...';msg.style.color='rgba(246,240,231,.72)';
-      const payload={email,origem:'capital-do-engano-home-v1.5',consentiu:true,turma,interesse};
-      try{await fetch(WAITLIST_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){}
+      const payload=new URLSearchParams({email,origem:'capital-do-engano-home-v1.5',consentiu:'true',turma,interesse});
+      try{await fetch(WAITLIST_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body:payload.toString()});}catch(e){}
       try{await fetch('https://'+SUBSTACK_SUB+'.substack.com/api/v1/free',{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,first_url:location.href,first_referrer:document.referrer})});}catch(e){}
       msg.textContent='Anotado. Você recebe os avisos da turma escolhida e as próximas publicações.';msg.style.color='#d8f03c';form.reset();document.getElementById('tuesday').checked=true;document.getElementById('next-class').checked=true;button.disabled=false;
     }
