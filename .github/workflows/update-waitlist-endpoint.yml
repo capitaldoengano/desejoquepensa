@@ -1,4 +1,4 @@
-name: Atualizar endpoint de inscrições
+name: Corrigir formulário de inscrições
 
 on:
   push:
@@ -9,29 +9,44 @@ permissions:
   contents: write
 
 jobs:
-  update-endpoint:
+  fix-form:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Trocar endpoint antigo pelo novo
+      - name: Corrigir POST do formulário
         run: |
           python - <<'PY'
           from pathlib import Path
           p = Path('index.html')
           text = p.read_text(encoding='utf-8')
-          old = 'https://script.google.com/macros/s/AKfycbzYLCKbPBCM4puSawS359DqaYR9gjI7DsGg2wBYST9x6eAuBHs6U4PNbtvz9EUPN5R0jQ/exec'
-          new = 'https://script.google.com/macros/s/AKfycbwLwXu7yA2k3YvWyBqOMSSfnzRwR58wXxqY4SEbpK5EW2DYldIZgKlH9GmjTxIQWyBG/exec'
+          old = """      const payload={email,origem:'capital-do-engano-home-v1.5',consentiu:true,turma,interesse};
+      try{await fetch(WAITLIST_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}catch(e){}"""
+          new = """      const payload=new URLSearchParams({
+        email,
+        origem:'capital-do-engano-home-v1.5',
+        consentiu:'true',
+        turma,
+        interesse
+      });
+      try{
+        await fetch(WAITLIST_URL,{
+          method:'POST',
+          mode:'no-cors',
+          headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+          body:payload.toString()
+        });
+      }catch(e){}"""
           if old not in text:
-              raise SystemExit('Endpoint antigo não encontrado em index.html')
-          p.write_text(text.replace(old, new), encoding='utf-8')
+              raise SystemExit('Trecho antigo do formulário não encontrado em index.html')
+          p.write_text(text.replace(old,new),encoding='utf-8')
           PY
 
-      - name: Commit da alteração
+      - name: Commit da correção
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "liga formulário ao Apps Script final"
+          git commit -m "corrige captura de turma e interesse"
           git push
