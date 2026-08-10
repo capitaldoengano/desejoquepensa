@@ -5,9 +5,12 @@ const SHEET_ENVIOS = 'Envios';
 const SHEET_CONFIG = 'Configurações';
 
 function doGet() {
-  return ContentService
-    .createTextOutput(JSON.stringify({ ok: true, service: 'Desejo que Pensa' }))
-    .setMimeType(ContentService.MimeType.JSON);
+  return json_({
+    ok: true,
+    service: 'Desejo que Pensa',
+    version: '1.4',
+    spreadsheet: SPREADSHEET_ID
+  });
 }
 
 function doPost(e) {
@@ -20,12 +23,15 @@ function doPost(e) {
     const origem = String(data.origem || 'site').trim();
 
     if (!email || !email.includes('@')) return json_({ ok: false, error: 'email_invalido' });
+    if (!turma) return json_({ ok: false, error: 'turma_invalida', recebido: data.turma || null });
+    if (!interesse) return json_({ ok: false, error: 'interesse_invalido', recebido: data.interesse || null });
     if (!consentiu) return json_({ ok: false, error: 'consentimento_necessario' });
 
     const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
     const sheet = ss.getSheetByName(SHEET_INSCRICOES);
-    const now = new Date();
+    if (!sheet) throw new Error('A aba Inscrições não foi encontrada.');
 
+    const now = new Date();
     sheet.appendRow([
       now,
       email,
@@ -50,30 +56,50 @@ function doPost(e) {
       logEmail_(email, 'confirmação', 'Você entrou no Desejo que Pensa', 'Erro', String(mailError));
     }
 
-    notifyAdmin_(email, turma, interesse);
-    return json_({ ok: true });
+    try { notifyAdmin_(email, turma, interesse); } catch (_) {}
+    return json_({ ok: true, turma, interesse, recebido_em: now.toISOString() });
   } catch (error) {
-    return json_({ ok: false, error: String(error) });
+    return json_({ ok: false, error: String(error && error.message ? error.message : error) });
   }
 }
 
 function parsePayload_(e) {
   if (!e) return {};
-  if (e.postData && e.postData.contents) {
-    try { return JSON.parse(e.postData.contents); } catch (_) {}
+
+  // Formulário simples / URLSearchParams: caminho preferido para GitHub Pages.
+  if (e.parameter && Object.keys(e.parameter).length) {
+    return e.parameter;
   }
-  return e.parameter || {};
+
+  // Compatibilidade com versões antigas que enviavam JSON.
+  if (e.postData && e.postData.contents) {
+    try {
+      return JSON.parse(e.postData.contents);
+    } catch (_) {
+      const out = {};
+      String(e.postData.contents).split('&').forEach(pair => {
+        const parts = pair.split('=');
+        if (!parts[0]) return;
+        out[decodeURIComponent(parts[0])] = decodeURIComponent((parts.slice(1).join('=') || '').replace(/\+/g, ' '));
+      });
+      return out;
+    }
+  }
+  return {};
 }
 
 function normalizeTurma_(value) {
-  const v = String(value || '').toLowerCase();
-  if (v.includes('qui')) return 'quinta';
-  return 'terca';
+  const v = String(value || '').trim().toLowerCase();
+  if (['terca', 'terça', 'terça-feira', 'tuesday'].includes(v)) return 'terça';
+  if (['quinta', 'quinta-feira', 'thursday'].includes(v)) return 'quinta';
+  return '';
 }
 
 function normalizeInteresse_(value) {
-  const v = String(value || '').toLowerCase();
-  return v.includes('reprise') ? 'reprise' : 'proxima turma';
+  const v = String(value || '').trim().toLowerCase();
+  if (['proxima turma', 'próxima turma', 'proxima', 'próxima'].includes(v)) return 'próxima turma';
+  if (v === 'reprise') return 'reprise';
+  return '';
 }
 
 function sendConfirmation_(email, turma, interesse) {
@@ -93,13 +119,7 @@ function sendConfirmation_(email, turma, interesse) {
     '@ogustavosouzapauli'
   ].join('\n');
 
-  MailApp.sendEmail({
-    to: email,
-    subject,
-    body,
-    name: 'Desejo que Pensa',
-    replyTo: ADMIN_EMAIL
-  });
+  MailApp.sendEmail({ to: email, subject, body, name: 'Desejo que Pensa', replyTo: ADMIN_EMAIL });
 }
 
 function notifyAdmin_(email, turma, interesse) {
@@ -111,49 +131,23 @@ function notifyAdmin_(email, turma, interesse) {
   });
 }
 
-function enviarAulaTerca() {
-  enviarAulaPorTurma_('terca');
-}
-
-function enviarAulaQuinta() {
-  enviarAulaPorTurma_('quinta');
-}
-
-function enviarReprise() {
-  enviarSegmento_('reprise');
-}
+function enviarAulaTerca() { enviarAulaPorTurma_('terça'); }
+function enviarAulaQuinta() { enviarAulaPorTurma_('quinta'); }
+function enviarReprise() { enviarSegmento_('reprise'); }
 
 function enviarAulaPorTurma_(turma) {
   const config = getConfig_();
   const meet = turma === 'quinta' ? config.MEET_QUINTA : config.MEET_TERCA;
   if (!meet) throw new Error(`Preencha ${turma === 'quinta' ? 'MEET_QUINTA' : 'MEET_TERCA'} na aba Configurações.`);
-
   const dia = turma === 'quinta' ? 'quinta-feira' : 'terça-feira';
   const subject = `Desejo que Pensa — encontro de ${dia}`;
-  const body = [
-    `O encontro de ${dia} está confirmado.`,
-    '',
-    `Link: ${meet}`,
-    '',
-    'Entre alguns minutos antes para testar áudio e câmera. Se não quiser abrir a câmera, tudo bem.',
-    '',
-    'Até lá,',
-    'Gustavo Souza Pauli'
-  ].join('\n');
-
+  const body = [`O encontro de ${dia} está confirmado.`, '', `Link: ${meet}`, '', 'Entre alguns minutos antes para testar áudio e câmera. Se não quiser abrir a câmera, tudo bem.', '', 'Até lá,', 'Gustavo Souza Pauli'].join('\n');
   sendSegment_(row => row.turma === turma, 'aula', subject, body);
 }
 
 function enviarSegmento_(interesse) {
   const subject = 'Desejo que Pensa — aviso de reprise';
-  const body = [
-    'A reprise do Desejo que Pensa está sendo organizada.',
-    '',
-    'Você marcou interesse em receber esse aviso. Quando data e horário forem fechados, envio os detalhes por aqui.',
-    '',
-    'Gustavo Souza Pauli'
-  ].join('\n');
-
+  const body = ['A reprise do Desejo que Pensa está sendo organizada.', '', 'Você marcou interesse em receber esse aviso. Quando data e horário forem fechados, envio os detalhes por aqui.', '', 'Gustavo Souza Pauli'].join('\n');
   sendSegment_(row => row.interesse === interesse, 'reprise', subject, body);
 }
 
@@ -173,7 +167,6 @@ function sendSegment_(predicate, type, subject, body) {
       consentimento: String(r[4] || '').trim().toLowerCase()
     };
     if (!row.email || seen.has(row.email) || row.consentimento !== 'sim' || !predicate(row)) continue;
-
     try {
       MailApp.sendEmail({ to: row.email, subject, body, name: 'Desejo que Pensa', replyTo: ADMIN_EMAIL });
       sheet.getRange(i + 1, 9).setValue(new Date());
@@ -213,7 +206,5 @@ function onOpen() {
 }
 
 function json_(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
+  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
 }
