@@ -21,8 +21,8 @@ jobs:
           from pathlib import Path
           p = Path('index.html')
           text = p.read_text(encoding='utf-8')
-          old = 'https://script.google.com/macros/s/AKfycbwE1TP3rlB1O0qRy0z5vCGykCmvIBW3Lno3E7piBQ4o6Q2IGUBmtldZoic3BW1UB5qa/exec'
-          new = 'https://script.google.com/macros/s/AKfycbzYLCKbPBCM4puSawS359DqaYR9gjI7DsGg2wBYST9x6eAuBHs6U4PNbtvz9EUPN5R0jQ/exec'
+          old = 'https://script.google.com/macros/s/AKfycbzYLCKbPBCM4puSawS359DqaYR9gjI7DsGg2wBYST9x6eAuBHs6U4PNbtvz9EUPN5R0jQ/exec'
+          new = 'https://script.google.com/macros/s/AKfycbwLwXu7yA2k3YvWyBqOMSSfnzRwR58wXxqY4SEbpK5EW2DYldIZgKlH9GmjTxIQWyBG/exec'
           if old not in text:
               raise SystemExit('Endpoint antigo não encontrado em index.html')
           p.write_text(text.replace(old, new), encoding='utf-8')
@@ -33,5 +33,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git commit -m "liga formulário ao novo Apps Script"
+          git commit -m "liga formulário ao Apps Script final"
           git push
