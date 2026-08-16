@@ -1,4 +1,4 @@
-const SPREADSHEET_ID = '10CRuPakyxUGpKs5AD9JTEmJPSwf2T9FEA-HTRMHFa6k';
+const SPREADSHEET_ID = '14CCcQzrfQm6vBvxy57I8w0djirF2uOcSdtMLrCWCc4s';
 const ADMIN_EMAIL = 'gustavosouzapauli@gmail.com';
 const SHEET_INSCRICOES = 'Inscrições';
 const SHEET_ENVIOS = 'Envios';
@@ -8,7 +8,7 @@ function doGet() {
   return json_({
     ok: true,
     service: 'Desejo que Pensa',
-    version: '1.4',
+    version: '2.0',
     spreadsheet: SPREADSHEET_ID
   });
 }
@@ -17,12 +17,15 @@ function doPost(e) {
   try {
     const data = parsePayload_(e);
     const email = String(data.email || '').trim().toLowerCase();
+    const nome = String(data.nome || data.name || '').trim();
+    const whatsapp = String(data.whatsapp || data.telefone || data.phone || '').trim();
+    const instagram = String(data.instagram || data.ig || '').trim();
     const turma = normalizeTurma_(data.turma);
     const interesse = normalizeInteresse_(data.interesse);
-    const consentiu = data.consentiu === true || String(data.consentiu).toLowerCase() === 'true';
+    const consentiu = data.consentiu === true || String(data.consentiu).toLowerCase() === 'true' || String(data.consentimento).toLowerCase() === 'sim';
     const origem = String(data.origem || 'site').trim();
 
-    if (!email || !email.includes('@')) return json_({ ok: false, error: 'email_invalido' });
+    if (!email || !email.includes('@')) return json_({ ok: false, error: 'email_invalido', recebido: email || null });
     if (!turma) return json_({ ok: false, error: 'turma_invalida', recebido: data.turma || null });
     if (!interesse) return json_({ ok: false, error: 'interesse_invalido', recebido: data.interesse || null });
     if (!consentiu) return json_({ ok: false, error: 'consentimento_necessario' });
@@ -34,30 +37,32 @@ function doPost(e) {
     const now = new Date();
     sheet.appendRow([
       now,
+      nome,
       email,
+      whatsapp,
+      instagram,
       turma,
       interesse,
       'Sim',
       origem,
       'Interessado',
       'Pendente',
-      '',
       ''
     ]);
 
     const row = sheet.getLastRow();
     try {
       sendConfirmation_(email, turma, interesse);
-      sheet.getRange(row, 8).setValue('Enviada');
-      sheet.getRange(row, 9).setValue(new Date());
-      logEmail_(email, 'confirmação', 'Você entrou no Desejo que Pensa', 'Enviado', '');
+      sheet.getRange(row, 11).setValue('Enviada');
+      logEmail_(email, 'confirmação', 'Você entrou no Desejo que Pensa', 'Enviado', origem);
     } catch (mailError) {
-      sheet.getRange(row, 8).setValue('Erro');
+      sheet.getRange(row, 11).setValue('Erro');
+      sheet.getRange(row, 12).setValue(String(mailError));
       logEmail_(email, 'confirmação', 'Você entrou no Desejo que Pensa', 'Erro', String(mailError));
     }
 
     try { notifyAdmin_(email, turma, interesse); } catch (_) {}
-    return json_({ ok: true, turma, interesse, recebido_em: now.toISOString() });
+    return json_({ ok: true, turma, interesse, recebido_em: now.toISOString(), spreadsheet: SPREADSHEET_ID });
   } catch (error) {
     return json_({ ok: false, error: String(error && error.message ? error.message : error) });
   }
@@ -66,12 +71,10 @@ function doPost(e) {
 function parsePayload_(e) {
   if (!e) return {};
 
-  // Formulário simples / URLSearchParams: caminho preferido para GitHub Pages.
   if (e.parameter && Object.keys(e.parameter).length) {
     return e.parameter;
   }
 
-  // Compatibilidade com versões antigas que enviavam JSON.
   if (e.postData && e.postData.contents) {
     try {
       return JSON.parse(e.postData.contents);
@@ -161,15 +164,14 @@ function sendSegment_(predicate, type, subject, body) {
   for (let i = 1; i < values.length; i++) {
     const r = values[i];
     const row = {
-      email: String(r[1] || '').trim().toLowerCase(),
-      turma: String(r[2] || '').trim().toLowerCase(),
-      interesse: String(r[3] || '').trim().toLowerCase(),
-      consentimento: String(r[4] || '').trim().toLowerCase()
+      email: String(r[2] || '').trim().toLowerCase(),
+      turma: String(r[5] || '').trim().toLowerCase(),
+      interesse: String(r[6] || '').trim().toLowerCase(),
+      consentimento: String(r[7] || '').trim().toLowerCase()
     };
     if (!row.email || seen.has(row.email) || row.consentimento !== 'sim' || !predicate(row)) continue;
     try {
       MailApp.sendEmail({ to: row.email, subject, body, name: 'Desejo que Pensa', replyTo: ADMIN_EMAIL });
-      sheet.getRange(i + 1, 9).setValue(new Date());
       logEmail_(row.email, type, subject, 'Enviado', '');
       seen.add(row.email);
     } catch (error) {
@@ -193,7 +195,7 @@ function getConfig_() {
 function logEmail_(email, type, subject, status, observation) {
   const ss = SpreadsheetApp.openById(SPREADSHEET_ID);
   const sheet = ss.getSheetByName(SHEET_ENVIOS);
-  sheet.appendRow([new Date(), email, type, subject, status, observation || '']);
+  sheet.appendRow([new Date(), email, type, subject, status, observation || '', 'Apps Script', ADMIN_EMAIL]);
 }
 
 function onOpen() {
