@@ -206,14 +206,17 @@
   <footer><div class="container foot"><div><strong>Capital do Engano</strong><span>Desejo, cultura, afeto e as ficções que organizam o cotidiano.</span><span class="mox">uma publicação produzida por MOXNOX</span></div><div class="footlinks"><a href="#desejo">Desejo que Pensa</a><a href="#mailing">Turmas</a><a href="https://instagram.com/ogustavosouzapauli" target="_blank" rel="noopener noreferrer">@ogustavosouzapauli</a></div></div></footer>
   <script>
     const PAYMENT_API='https://desejoquepensa.vercel.app';
+    const SIGNUP_API=`${PAYMENT_API}/api/register`;
     const enrollmentForm=document.getElementById('enrollment-form');
     const paymentStep=document.getElementById('payment-step');
     const paymentMsg=document.getElementById('payment-msg');
+    const formMsg=document.getElementById('form-msg');
+    const enrollmentButton=enrollmentForm.querySelector('button[type="submit"]');
     const payButton=document.getElementById('pay-button');
     const editButton=document.getElementById('edit-enrollment');
     let enrollmentData=null;
 
-    enrollmentForm.addEventListener('submit',event=>{
+    enrollmentForm.addEventListener('submit',async event=>{
       event.preventDefault();
       const honeypot=document.getElementById('website').value.trim();
       if(honeypot)return;
@@ -222,14 +225,50 @@
       const whatsapp=document.getElementById('whatsapp').value.trim();
       const dia=enrollmentForm.querySelector('input[name="dia"]:checked')?.value||'';
       const interesse=enrollmentForm.querySelector('input[name="interesse"]:checked')?.value||'';
-      if(!name||!email||!whatsapp||!dia||!interesse)return;
-      enrollmentData={name,email,whatsapp,turma:`${dia} · ${interesse}`};
-      document.getElementById('summary-name').textContent=name;
-      document.getElementById('summary-class').textContent=`${dia} · ${interesse}`;
-      document.getElementById('summary-email').textContent=email;
-      enrollmentForm.hidden=true;
-      paymentStep.hidden=false;
-      paymentStep.scrollIntoView({behavior:'smooth',block:'nearest'});
+      const consentiu=document.getElementById('consent').checked;
+      if(!name||!email||!whatsapp||!dia||!interesse||!consentiu){
+        enrollmentForm.reportValidity();
+        return;
+      }
+
+      enrollmentButton.disabled=true;
+      enrollmentButton.textContent='Registrando inscrição…';
+      formMsg.textContent='Salvando seus dados com segurança…';
+
+      try{
+        const response=await fetch(SIGNUP_API,{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            nome:name,
+            email,
+            whatsapp,
+            instagram:'',
+            cidade:'',
+            turma:dia,
+            interesse,
+            consentiu,
+            origem:'capital-do-engano-github-pages-v2'
+          })
+        });
+        const result=await response.json();
+        if(!response.ok||result?.ok!==true)throw new Error(result?.error||result?.message||'signup_error');
+
+        enrollmentData={name,email,whatsapp,turma:`${dia} · ${interesse}`};
+        document.getElementById('summary-name').textContent=name;
+        document.getElementById('summary-class').textContent=`${dia} · ${interesse}`;
+        document.getElementById('summary-email').textContent=email;
+        formMsg.textContent='Inscrição registrada. Agora confirme o pagamento.';
+        enrollmentForm.hidden=true;
+        paymentStep.hidden=false;
+        paymentStep.scrollIntoView({behavior:'smooth',block:'nearest'});
+      }catch(error){
+        console.error(error);
+        formMsg.textContent='Não foi possível registrar sua inscrição. Confira sua conexão e tente novamente.';
+      }finally{
+        enrollmentButton.disabled=false;
+        enrollmentButton.textContent='Continuar para pagamento →';
+      }
     });
 
     editButton.addEventListener('click',()=>{
